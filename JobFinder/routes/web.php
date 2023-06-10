@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\JobCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/index',function(){
-  return view("index");
+  return view("index",["JobCategories" => JobCategory::all()->take(20)]);
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

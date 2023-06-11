@@ -13,7 +13,7 @@
     <title>Welcome to Job Finder</title>
 </head>
 
-<body class="relative min-h-screen overflow-x-hidden pb-36">
+<body>
     <!-- Navigation -->
     <nav>
         <div class="container mx-auto flex justify-between">
@@ -33,15 +33,15 @@
     <main>
         @yield('content')
     </main>
-    <footer class="bg-black p-4 absolute bottom-0 w-screen">
+    <footer class="bg-black p-4">
         <div class="container mx-auto">
             <div class="flex flex-col sm:flex-row">
-                <div class="flex-1 flex justify-center items-center gap-5 text-5xl text-white">
+                <div class="flex-1 mt-3 flex justify-center items-center gap-5 text-5xl text-white">
                     <a href=""><i class="fa-brands fa-facebook"></i></a>
                     <a href=""><i class="fa-brands fa-twitter"></i></a>
                     <a href=""><i class="fa-brands fa-instagram"></i></a>
                 </div>
-                <div class="flex-1 text-white flex flex-col justify-center items-center text-lg">
+                <div class="flex-1 mt-3 text-white flex flex-col justify-center items-center text-lg">
                     <div class="text-center mb-1">
                         <h5 class="text-xl font-semibold">Site Links</h5>
                     </div>
@@ -50,7 +50,7 @@
                     <a href="" class="hover:underline w-fit">Login</a>
                     <a href="" class="hover:underline w-fit">Register</a>
                 </div>
-                <div class="flex-fill text-white text-lg text-center sm:text-start">
+                <div class="flex-fill mt-3 text-white text-lg text-center sm:text-start">
                     <div class="text-center mb-1">
                         <h5 class="text-xl font-semibold">Contact Information</h5>
                     </div>

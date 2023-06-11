@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\JobCategory;
 use Illuminate\Support\Facades\Route;
@@ -14,13 +15,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Common PHP convention
+// index = show all
+// show = single data
+// create = equivalent to GET with create form
+// store = equivalent to Post in ASP
+// edit = edit with form GET
+// update = update POST(Get first then update)
+// destroy = delete the data 
+Route::get('/', [HomeController::class,'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/index',function(){
-  return view("index",["JobCategories" => JobCategory::all()->take(20)]);
-});
+Route::get('/index',[HomeController::class,'index'])->name('/');
+Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

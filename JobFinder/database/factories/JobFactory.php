@@ -18,9 +18,9 @@ class JobFactory extends Factory
     {
         return [
             //
-            'title' => fake()->title(),
+            'title' => fake()->streetName(),
             'tags' => 'PHP, ASP.NET, Backend',
-            'logo' => '/public/wallpaper.png',
+            'logo' => 'wallpaper.png',
             'company' => fake()->company(),
             'location' => fake()->address(),
             'email'=> fake()->unique()->companyEmail(),

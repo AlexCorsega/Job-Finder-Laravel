@@ -27,6 +27,8 @@ Route::get('/', [HomeController::class,'index']);
 
 Route::get('/index',[HomeController::class,'index'])->name('/');
 Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
+Route::get('/jobs/{id}',[HomeController::class,'show'])->name('jobs.job');
+
 
 
 Route::get('/dashboard', function () {

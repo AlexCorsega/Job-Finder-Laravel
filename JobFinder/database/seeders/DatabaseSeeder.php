@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-        // job::factory(8)->create();
+        job::factory(8)->create();
         // DB::table('jobcategory')->insert(["Category" => "ASP.NET"]);
         // DB::table('jobcategory')->insert(["Category" => "Backend"]);
 
@@ -33,10 +33,9 @@ class DatabaseSeeder extends Seeder
             // DB::table('jobcategory')->insert(["Category" => "PHP"]);
         // DB::table('jobcategory')->insert(["Category" => "Web Scaping"]);
 
-        // DB::table('jobcategory')->insert(["Category" => "AWS"]);
-        // DB::table('jobcategory')->insert(["Category" => "Database Administrator"]);
-        // DB::table('jobcategory')->insert(["Category" => "SQL Server"]);
-        // DB::table('jobcategory')->insert(["Category" => "MySQL"]);
+        // DB::table('jobtype')->insert(["Type" => "Full Time"]);
+        // DB::table('jobtype')->insert(["Type" => "Part Time"]);
+        // DB::table('jobtype')->insert(["Type" => "Gig"]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

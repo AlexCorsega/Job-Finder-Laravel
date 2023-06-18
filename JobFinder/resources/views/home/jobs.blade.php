@@ -2,10 +2,10 @@
 
 
 @section('content')
-    <div class="container mx-auto">
+    <div class="container mx-auto pb-8">
         <div class="flex pt-3 gap-3">
             <!--Side Bar -->
-            <section class="w-64 shadow p-3 rounded-xl space-y-2 border-gray-300 border text-lg">
+            <section class="w-64 shadow p-3 pb-6 h-fit rounded-xl space-y-2 border-gray-300 border text-lg">
                 <h5 class="text-xl font-semibold">Filter</h5>
                 <hr>
                 <div>
@@ -34,27 +34,53 @@
 
             </section>
             <section class="flex-1 p-3 rounded-xl space-y-2">
-                <form action="#" method="get">
+                <form action="{{ route('jobs') }}" method="get">
                     <div class="flex justify-center text-lg">
                         <div class="relative w-[300px] sm:w-[500px]">
-                            <input type="text"
-                                class="w-full text-xl py-2 shadow-md px-3 ps-10 focus:outline-gray-400 rounded-full border border-gray-300"
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                class="w-full text-xl py-2 shadow-md px-3 ps-10 focus:outline-gray-500 ring-0 focus:border-none focus:ring-0 rounded-full border border-gray-300"
                                 placeholder="Search job">
                             <i class="fa-solid fa-magnifying-glass absolute left-4 text-lg mt-2"></i>
-                            <button
+                            <button type="submit"
                                 class="rounded-full mt-[5px] px-4 py-1 bg-gray-900 text-white font-semibold absolute right-2 text-md hover:bg-gray-500">Search</button>
                         </div>
                     </div>
                 </form>
-                <div class="mt-4 flex gap-4 flex-wrap justify-center">
-                    @foreach ($jobs as $job)
-                      <div class="p-2 pb-5 shadow-md w-72">
-                        <x-job-card :job="$job"></x-job-card>
-                          <div class="mt-4">
-                              <a href="{{route('jobs.job',$job->id)}}" class="text-sm text-blue-500 hover:underline hover:text-blue-900">See more <i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
+                <div class="flex flex-col">
+                    @if (request('search'))
+                        <div class="text-xl text-gray-700 mt-2">
+                            <p>Showing results of <span class="font-semibold"> {{ request('search') }} </span></p>
                         </div>
-                    @endforeach
+                    @endif
+                    @if ($jobs->count() > 0)
+                        <div class="mt-4 flex gap-4 flex-wrap justify-start">
+                            @foreach ($jobs as $job)
+                                <div class="shadow-md w-72 relative
+                                ">
+                                    <div class="p-2 mb-20">
+                                        <x-job-card :job="$job"></x-job-card>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 right-0">
+                                        <div class="mt-4 p-2">
+                                            <a href="{{ route('jobs.job', $job->id) }}"
+                                                class="text-sm text-blue-500 hover:underline hover:text-blue-900">See more
+                                                <i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                        <div class="text-center bg-neutral-100 border-t mt-2 flex-1">
+                                            <p class="text-md py-1 font-medium text-dark">{{ $job->jobType->Type }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="self-center text-center mt-8">
+                            <h5 class="text-2xl">No results found.</h5>
+                        </div>
+                    @endif
+                </div>
+                <div class="mt-6 p-3">
+                    {{ $jobs->links() }}
                 </div>
             </section>
         </div>

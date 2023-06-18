@@ -15,17 +15,37 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <div class="flex flex-col min-h-screen ">
-        <div class="flex-1">
-            <nav class="shadow-b shadow">
-                <div class="container mx-auto flex justify-between">
-                    <div>
-                        <a href="{{ route('/') }}">
-                            <img src="{{ asset('logo.svg') }}" class="h-16 inline" />
-                        </a>
+    <div class="flex">
+        <div class="w-52 bg-blue-700 h-screen pt-3">
+            <div>
+                @if (empty(Auth::user()->photo))
+                    <div class="flex items-center justify-center mx-auto uppercase h-36 w-36 bg-white rounded-full">
+                        <span class="text-7xl mb-4">{{ Auth::user()->username[0] }}</span>
                     </div>
-                    @if (Auth::check())
+                @else
+                    <div class="flex justify-center">
+                        <img src="{{ asset('logo.svg') }}" alt=""
+                            class="h-36 w-36 text-center object-cover bg-black" style="border-radius: 6.5rem;">
+                    </div>
+                @endif
+                {{-- <div class="text-center mt-4">
+                    <label for="profile" class="rounded text-white cursor-pointer bg-gray-900 py-2 px-4 hover:bg-gray-700">
+                        Change Profile
+                        <input type="file" name="" id="profile" hidden>
+                    </label>
+                </div> --}}
+            </div>
+            <!--Navigation side bar -->
+            <div class="mt-3 text-center" >
+                <a href="" class="block transition-all duration-200  ease-in text-white text-lg hover:bg-gray-900 bg-gray-900 hover:text-white font-semibold py-2">Dashboard</a>
+                <a href="" class="block transition-all duration-200  ease-in text-white text-lg hover:bg-gray-900 hover:text-white font-semibold py-2">Jobs</a>
+                <a href="" class="block transition-all duration-200  ease-in text-white text-lg hover:bg-gray-900 hover:text-white font-semibold py-2">Status</a>
+            </div>
+        </div>
+        <div class="flex-1">
+            <div class="border-b shadow-md">
+                <x-container class="px-10 sm:px-0">
+                    <div class="flex justify-end">
                         <div>
                             <!-- Settings Dropdown -->
                             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -36,7 +56,7 @@
                                             <div class="mr-2">
                                                 @if (empty(Auth::user()->photo))
                                                     <div
-                                                        class="h-10 w-10 rounded-full bg-blue-500 text-white uppercase flex items-center justify-center">
+                                                        class="h-10 w-10 rounded-full bg-orange-500 text-white uppercase flex items-center justify-center">
                                                         {{ Auth::user()->username[0] }}
                                                     </div>
                                                 @else
@@ -59,15 +79,14 @@
                                     </x-slot>
 
                                     <x-slot name="content">
-                                        <x-dropdown-link >
-                                            {{ __('Job listing') }}
-                                        </x-dropdown-link>
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('Profile') }}
                                         </x-dropdown-link>
+
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
+
                                             <x-dropdown-link :href="route('logout')"
                                                 onclick="event.preventDefault();
                                                     this.closest('form').submit();">
@@ -93,65 +112,17 @@
                                 </button>
                             </div>
                         </div>
-                    @else
-                        <div class="flex space-x-3">
-                            <a href="{{ route('login') }}"
-                                class="text-white hover:underline hover:bg-blue-900 rounded bg-blue-700 py-1 px-5 font-semibold text-lg my-auto">Login</a>
-                            <a href="{{ route('register') }}"
-                                class="text-white hover:underline hover:bg-blue-900 rounded bg-blue-700 py-1 px-5 font-semibold text-lg my-auto">Register</a>
-                        </div>
-                </div>
-                @endif
-
-            </nav>
+                    </div>
+                </x-container>
+            </div>
             <main>
-                @yield('content')
+                @yield('main')
             </main>
         </div>
-
-        {{-- Footer --}}
-        <footer class="bg-black p-4">
-            <div class="container mx-auto">
-                <div class="flex flex-col sm:flex-row">
-                    <div class="flex-1 mt-3 flex justify-center items-center gap-5 text-5xl text-white">
-                        <a href=""><i class="fa-brands fa-facebook"></i></a>
-                        <a href=""><i class="fa-brands fa-twitter"></i></a>
-                        <a href=""><i class="fa-brands fa-instagram"></i></a>
-                    </div>
-                    <div class="flex-1 mt-3 text-white flex flex-col justify-center items-center text-lg">
-                        <div class="text-center mb-1">
-                            <h5 class="text-xl font-semibold">Site Links</h5>
-                        </div>
-                        <a href="" class="hover:underline w-fit">Home</a>
-                        <a href="" class="hover:underline w-fit">Jobs</a>
-                        <a href="" class="hover:underline w-fit">Login</a>
-                        <a href="" class="hover:underline w-fit">Register</a>
-                    </div>
-                    <div class="flex-fill mt-3 text-white text-lg text-center sm:text-start">
-                        <div class="text-center mb-1">
-                            <h5 class="text-xl font-semibold">Contact Information</h5>
-                        </div>
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i>
-                            1234 Maple Street
-                            Anytown, USA
-                        </p>
-                        <p class="mt-2">
-                            <i class="fa-solid fa-address-book"></i>
-                            +1 (555) 123-4567
-                        </p>
-                        <p class="mt-2">
-                            <i class="fa-solid fa-envelope"></i>
-                            example123@email.com
-                        </p>
-                    </div>
-                </div>
-                <div class="text-center text-white mt-3">
-                    <p>Copyright &copy; {{ date('Y') }}, All Rights Reserved</p>
-                </div>
-            </div>
-        </footer>
     </div>
+    <footer>
+        @yield('footer')
+    </footer>
 </body>
 
 </html>

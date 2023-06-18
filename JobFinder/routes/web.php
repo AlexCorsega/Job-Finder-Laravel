@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Freelancer\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\JobCategory;
@@ -23,17 +24,21 @@ use Illuminate\Support\Facades\Route;
 // edit = edit with form GET
 // update = update POST(Get first then update)
 // destroy = delete the data 
-Route::get('/', [HomeController::class,'index']);
+Route::get('/', [HomeController::class, 'index'])->middleware('guest');
 
-Route::get('/index',[HomeController::class,'index'])->name('/');
-Route::get('/jobs',[HomeController::class,'jobs'])->name('jobs');
-Route::get('/jobs/{id}',[HomeController::class,'show'])->name('jobs.job');
+Route::get('/index', [HomeController::class, 'index'])->name('/')->middleware('guest');
+Route::middleware('auth')->group(function () {
+    Route::get('/jobs/create', [HomeController::class, 'create'])
+        ->name('jobs.create');
+    Route::post('jobs/create', [HomeController::class, 'store'])
+        ->name('jobs.create.post');
+});
+Route::get('/jobs', [HomeController::class, 'jobs'])->name('jobs');
+Route::get('/jobs/{id}', [HomeController::class, 'show'])->name('jobs.job');
 
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class,'index'])
+->middleware(['auth', 'verified'])->name('freelancer.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,4 +46,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

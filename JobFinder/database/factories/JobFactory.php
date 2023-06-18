@@ -19,7 +19,7 @@ class JobFactory extends Factory
         return [
             //
             'title' => fake()->streetName(),
-            'tags' => 'PHP, ASP.NET, Backend',
+            'tags' => 'C#, ASP.NET, MVC',
             'logo' => 'wallpaper.png',
             'company' => fake()->company(),
             'location' => fake()->address(),

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-        job::factory(8)->create();
+        // job::factory(8)->create();
         // DB::table('jobcategory')->insert(["Category" => "ASP.NET"]);
         // DB::table('jobcategory')->insert(["Category" => "Backend"]);
 

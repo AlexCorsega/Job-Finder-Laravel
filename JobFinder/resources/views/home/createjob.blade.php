@@ -39,7 +39,7 @@
                 @enderror
             </div>
               <div class="mb-2">
-                <label for="jobtype" class="text-lg font-semibold block mb-1">Tags </label>
+                <label for="jobtype" class="text-lg font-semibold block mb-1">Employment Type </label>
                 <select type="text" name="jobtype" id="jobtype" 
                     value="{{ old('jobtype') }}"
                     class="rounded-md text-lg w-full focus:bg-blue-50 focus:border-2 py-1 px-2 border  border-gray-300 outline-blue-500 outline-2">

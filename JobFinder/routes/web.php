@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Freelancer\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\ProfileController;
 use App\Models\JobCategory;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +36,11 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/jobs', [HomeController::class, 'jobs'])->name('jobs');
 Route::get('/jobs/{id}', [HomeController::class, 'show'])->name('jobs.job');
-
+//listings here
+Route::get('/listings', [JobListingController::class, 'index'])->name('listings');
+Route::get('/listings/{id}', [JobListingController::class, 'show'])->name('listings.id');
+Route::post('/listing/{id}',[JobListingController::class,'update'])->name('listing.update');
+Route::delete('/listing/{id}',[JobListingController::class,'destroy'])->name('listing.delete');
 
 Route::get('/dashboard',[DashboardController::class,'index'])
 ->middleware(['auth', 'verified'])->name('freelancer.dashboard');

@@ -1,6 +1,7 @@
 @props(['job'])
-<div class="w-full">
-    <img src="{{asset('storage/'.$job->logo) }}" alt="" class="h-28 object-cover w-full">
+{{-- {{$attributes->merge(['class'=>"w-full max-w-xs"])}} --}}
+<div  >
+    <img src="{{asset('storage/'.$job->logo) }}" alt="" class="h-32 object-cover w-full">
     <p class="text-blue-500 text-xl font-semibold mt-2 line-clamp-2">{{ $job->title }}</p>
     <p class="text-gray-500 text-[14px] line-clamp-1">{{ $job->company }}</p>
     <div class="flex gap-1 flex-wrap mt-3 overflow-hidden h-8">
